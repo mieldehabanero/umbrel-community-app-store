@@ -1,0 +1,56 @@
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mieldehabanero-umbrel-monica_web_1
+      APP_PORT: 80
+
+  web:
+    image: monica:5.0.0-beta.5-apache@sha256:49ead3e6939e437a6ac15384990ba54a98fe9c13f56575547007d4e5af08c22b
+    env_file:
+      - ${APP_DATA_DIR}/data/.env
+    environment:
+      APP_URL: http://${DEVICE_DOMAIN_NAME}:9023
+      APP_NAME: Monica
+      APP_KEY: base64:Jw7c58z+VMYAneEYzrgC3EBF+xgnSQj76n1VtX9FU3g=
+      APP_TRUSTED_PROXIES: "*"
+      DB_CONNECTION: mysql
+      DB_HOST: mieldehabanero-umbrel-monica_db_1
+      DB_USERNAME: monica
+      DB_PASSWORD: 06d5c4416585e438cdb3a88bee59408c5646a899b71d51a4
+      DB_DATABASE: monica
+      CACHE_STORE: memcached
+      SESSION_DRIVER: database
+      QUEUE_CONNECTION: sync
+      SCOUT_DRIVER: meilisearch
+      SCOUT_QUEUE: true
+      MEILISEARCH_HOST: http://mieldehabanero-umbrel-monica_search_1:7700
+      MEILISEARCH_KEY: sNEcmhXjlAzOVvKkD6Jeu954w8gfRhi1y7eGgyydSDo=
+    volumes:
+      - ${APP_DATA_DIR}/data/monica:/var/www/html/storage:rw
+    restart: always
+    depends_on:
+      - db
+      - memcached
+      - search
+
+  db:
+    image: mariadb:11@sha256:1cac8492bd78b1ec693238dc600be173397efd7b55eabc725abc281dc855b482
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: true
+      MYSQL_DATABASE: monica
+      MYSQL_USER: monica
+      MYSQL_PASSWORD: 06d5c4416585e438cdb3a88bee59408c5646a899b71d51a4
+    volumes:
+      - ${APP_DATA_DIR}/data/db:/var/lib/mysql:rw
+    restart: always
+
+  memcached:
+    image: memcached:alpine@sha256:c77536380fd3c7740933767bb5279bd30e31c8d496081e5113a37d9b9eec43cb
+
+  search:
+    image: getmeili/meilisearch:v1.31.0@sha256:1af40ecce0b3a21f9a4ff14defaa80da602af3d456ef40a81e83e20043e97485
+    environment:
+      MEILI_MASTER_KEY: sNEcmhXjlAzOVvKkD6Jeu954w8gfRhi1y7eGgyydSDo=
+      MEILISEARCH_NO_ANALYTICS: true
+    volumes:
+      - ${APP_DATA_DIR}/data/meilisearch:/meili_data

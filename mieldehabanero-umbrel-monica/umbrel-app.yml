@@ -1,0 +1,29 @@
+manifestVersion: 1
+id: mieldehabanero-umbrel-monica
+name: Monica
+tagline: A Personal Relationship Management tool to help you document your social life.
+icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/monica.png
+category: social
+version: 5.0.0-beta.5
+description: >-
+  Monica is an open-source web application to organize and record your interactions with your loved ones. We call it a PRM, or Personal Relationship Management. Think of it as a CRM (a popular tool used by sales teams in the corporate world) for your friends or family. 
+website: https://www.monicahq.com/
+developer: monica
+gallery:
+  - 1.jpg
+  - 2.jpg
+  - 3.jpg
+dependencies: []
+repo: https://github.com/monicahq/monica
+support: https://github.com/monicahq/monica/issues
+port: 9023
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+releaseNotes: >-
+  This version includes various improvements and bug fixes.
+backupIgnore:
+  - data/redis/*
+torOnly: false
+submitter: mieldehabanero
+submission: https://github.com/getumbrel/umbrel-apps/pull/
