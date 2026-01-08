@@ -1,0 +1,26 @@
+manifestVersion: 1
+id: mieldehabanero-umbrel-jellystat
+category: media
+name: Jellystat
+version: "1.1.7"
+tagline: Jellystat
+description: >-
+  Jellystat is a free and open source Statistics App for Jellyfin! (This project is still in development - expect some weirdness) 
+releaseNotes: >-
+  This version includes various improvements and bug fixes.
+developer: cyfershepard
+website: https://hub.docker.com/r/cyfershepard/jellystat
+dependencies: []
+repo: https://github.com/CyferShepard/Jellystat
+support: https://github.com/CyferShepard/Jellystat/issues
+port: 10077
+gallery:
+  - 1.jpg
+  - 2.jpg
+  - 3.jpg
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/jellystat.png
+submitter: meildehabanero
+submission: https://github.com/mieldehabanero/mieldehabanero-umbrel-app-store
